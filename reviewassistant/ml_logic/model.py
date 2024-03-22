@@ -1,14 +1,15 @@
 import os
 
-from langchain.callbacks.streaming_stdout_final_only import FinalStreamingStdOutCallbackHandler
+import requests
+from langchain.callbacks.streaming_stdout_final_only import \
+    FinalStreamingStdOutCallbackHandler
 from langchain.chains import RetrievalQA
 from langchain.chains.retrieval_qa.base import BaseRetrievalQA
-from langchain.llms import GPT4All
+from langchain_community.llms import GPT4All
+from langchain_core.language_models.base import BaseLanguageModel
 from langchain_openai import ChatOpenAI
-import requests
 
 from reviewassistant.params import MODEL_DIR, OPENAI_API_KEY
-
 
 GPT4ALL_MODELS_URL = "https://gpt4all.io/models/gguf/"
 
@@ -42,7 +43,7 @@ def load_model(mode: str, model_name: str):
         return llm
 
 
-def build_chain(model, vector_db) -> BaseRetrievalQA:
+def build_chain(model: BaseLanguageModel, vector_db) -> BaseRetrievalQA:
     qa = RetrievalQA.from_chain_type(
         llm=model,
         chain_type="stuff",
