@@ -9,7 +9,7 @@ from reviewassistant.utils import parse_criteria
 def generate_criteria(product_txt: str, model: BaseLanguageModel) -> list[str]:
     vector_db = embed_text(product_txt, MODE_STEP_1)
     chain = build_chain(model, vector_db)
-    result = chain.invoke(PROMPT).get('result')
+    result = chain.invoke(PROMPT_1).get('result')
     criteria = parse_criteria(result)
     return criteria
 

@@ -15,7 +15,7 @@ MODEL_NAME_STEP_1 = 'mistral-7b-openorca.gguf2.Q4_0.gguf'
 MODE_STEP_2 = 'openai'
 MODEL_NAME_STEP_2 = None
 
-PROMPT = "Given this product title, please select between 3 and 6 criteria to rate in order to compose a product review. No need to explain the criteria."
+PROMPT_1 = "Given this product title, please select between 3 and 6 criteria to rate in order to compose a product review. No need to explain the criteria."
 
 ##################  CONSTANTS  ##################
 MODEL_DIR = "models"
