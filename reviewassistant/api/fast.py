@@ -37,5 +37,5 @@ def get_reviews(rated_criteria: dict[str, int]) -> list[str]:
 
 
 @app.get("/")
-def root():
-    return dict(greeting="Hello")
+def root() -> str:
+    return "Hello from your review writing assistant :)"
