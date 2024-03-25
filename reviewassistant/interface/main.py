@@ -13,7 +13,7 @@ def generate_criteria(product_txt: str, model: BaseLanguageModel) -> list[str]:
     criteria = parse_criteria(result)
     return criteria
 
-def generate_reviews(rated_criteria: dict[str, int], model: BaseLanguageModel, num_reviews: int=NUM_REVIEWS) -> str:
+def generate_reviews(product_txt: str, rated_criteria: dict[str, int], model: BaseLanguageModel, num_reviews: int=NUM_REVIEWS) -> str:
     pass
 
 

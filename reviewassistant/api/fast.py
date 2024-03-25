@@ -31,8 +31,8 @@ def get_criteria(product: str) -> list[str]:
 
 
 @app.get("/reviews")
-def get_reviews(rated_criteria: dict[str, int]) -> list[str]:
-    reviews = generate_reviews(rated_criteria, app.state.model2)
+def get_reviews(product:str, rated_criteria: dict[str, int]) -> list[str]:
+    reviews = generate_reviews(product, rated_criteria, app.state.model2, NUM_REVIEWS)
     return reviews
 
 
