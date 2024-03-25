@@ -2,6 +2,9 @@ import os
 
 ##################  VARIABLES  ##################
 
+MAX_CRITERIA = int(os.environ.get('MAX_CRITERIA'))
+NUM_REVIEWS = int(os.environ.get('NUM_REVIEWS'))
+
 HG_EMBEDDING_MODEL = os.environ.get('HG_EMBEDDING_MODEL')
 
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
@@ -13,7 +16,9 @@ MODEL_NAME_STEP_1 = os.environ.get('MODEL_NAME_STEP_1')
 MODE_STEP_2 = os.environ.get('MODE_STEP_2')
 MODEL_NAME_STEP_2 = os.environ.get('MODEL_NAME_STEP_2')
 
-PROMPT_1 = "Given this product title, please select between 3 and 6 criteria to rate in order to compose a product review. No need to explain the criteria."
+PROMPT_1 = f"Given this product title, please select between 3 and {MAX_CRITERIA}" \
+    " criteria to rate in order to compose a product review. No explanation," \
+    " no example."
 
 ##################  CONSTANTS  ##################
 MODEL_DIR = "models"

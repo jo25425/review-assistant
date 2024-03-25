@@ -13,6 +13,8 @@ def extract_documents(text: str) -> list[Document]:
     return docs
 
 def embed_text(text: str, mode: str) -> list[Document]:
+    print("Embedding text...", end=' ')
+
     docs = extract_documents(text)
 
     if mode == 'openai':
@@ -26,4 +28,5 @@ def embed_text(text: str, mode: str) -> list[Document]:
         embedder,
         persist_directory=persist_dir
     )
+    print("✅")
     return vector_db
