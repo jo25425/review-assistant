@@ -31,7 +31,8 @@ def generate_reviews(product_name: str, rated_criteria: dict[str, int], model: B
         prefix.append(pref)
 
     template = f" You are a costumer. I want you to generate a product review on {product_name}\
-            considering the following criteria: {prefix}. Be precise and concise."
+            considering the following criteria: {prefix}. Be precised and concised."
+
 
     criteria_list, adjective_list = [f"criteria_{n}" for n in range(len(rated_criteria[0]))],\
                                                   [f"adjective_{n}" for n in range(len(rated_criteria[0]))]
@@ -63,12 +64,12 @@ if __name__ == '__main__':
     # }
     # print(rated_criteria)
 
-    product = "iphone"
+    product = "jeans"
 
     rated_criteria = [{"Design": 0, "Comfort": 1, "Durability": 2, "Fit": 3, "Price": 4 }]
 
     # Second inference
-    llm_step_2 = load_model_review(model_name=MODEL_NAME_STEP_2)
+    llm_step_2 = load_model_review(model_name=MODEL_NAME_STEP_2, openai_key = OPENAI_API_KEY)
     reviews = generate_reviews(product, rated_criteria, llm_step_2)
 
     print(reviews)

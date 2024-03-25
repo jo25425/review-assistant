@@ -53,8 +53,8 @@ def build_chain(model: BaseLanguageModel, vector_db) -> BaseRetrievalQA:
     )
     return qa
 
-def load_model_review(model_name: str):
-    llm = OpenAI(model_name=model_name, openai_api_key=OPENAI_API_KEY, temperature=0.9)
+def load_model_review(model_name: str, openai_key):
+    llm = OpenAI(model_name=model_name, openai_api_key=openai_key, temperature=0.9)
     return llm
 
 
