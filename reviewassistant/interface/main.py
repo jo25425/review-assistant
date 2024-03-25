@@ -24,18 +24,18 @@ def generate_reviews(product_name: str, rated_criteria: dict[str, int], model: B
     Rated_Criteria = []
     rated_adjectives = []
 
-    for key, value in rated_criteria[0].items():
+    for key, value in rated_criteria.items():
         Rated_Criteria.append(key)
-        rated_adjectives.append(criteria[0][str(rated_criteria[0][key])])
-        pref = f"{key}:{criteria[0][str(rated_criteria[0][key])]}"
+        rated_adjectives.append(criteria[0][str(rated_criteria[key])])
+        pref = f"{key}:{criteria[0][str(rated_criteria[key])]}"
         prefix.append(pref)
 
     template = f" You are a costumer. I want you to generate a product review on {product_name}\
             considering the following criteria: {prefix}. Be precised and concised."
 
 
-    criteria_list, adjective_list = [f"criteria_{n}" for n in range(len(rated_criteria[0]))],\
-                                                  [f"adjective_{n}" for n in range(len(rated_criteria[0]))]
+    criteria_list, adjective_list = [f"criteria_{n}" for n in range(len(rated_criteria))],\
+                                                  [f"adjective_{n}" for n in range(len(rated_criteria))]
 
     input_variables = input_variable(product_name, criteria_list,  adjective_list)
 
@@ -51,22 +51,18 @@ def generate_reviews(product_name: str, rated_criteria: dict[str, int], model: B
 
 
 if __name__ == '__main__':
-    #product = input("Which product would you like a review for?\n ")
+    product = input("Which product would you like a review for?\n ")
 
-    # # First inference
-    # llm_step_1 = load_model(mode=MODE_STEP_1, model_name=MODEL_NAME_STEP_1)
-    # criteria = generate_criteria(product, llm_step_1)
+    # First inference
+    llm_step_1 = load_model(mode=MODE_STEP_1, model_name=MODEL_NAME_STEP_1)
+    criteria = generate_criteria(product, llm_step_1)
 
-    # print("\nRate the following from 1 to 5:")
-    # rated_criteria = {
-    #     criterium: int(input(f"{criterium.title()}? "))
-    #     for criterium in criteria
-    # }
-    # print(rated_criteria)
-
-    product = "jeans"
-
-    rated_criteria = [{"Design": 0, "Comfort": 1, "Durability": 2, "Fit": 3, "Price": 4 }]
+    print("\nRate the following from 1 to 5:")
+    rated_criteria = {
+        criterium: int(input(f"{criterium.title()}? "))
+        for criterium in criteria
+    }
+    print(rated_criteria)
 
     # Second inference
     llm_step_2 = load_model_review(model_name=MODEL_NAME_STEP_2, openai_key = OPENAI_API_KEY)
