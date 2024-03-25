@@ -7,12 +7,12 @@ from langchain.chains import RetrievalQA
 from langchain.chains.retrieval_qa.base import BaseRetrievalQA
 from langchain_community.llms import GPT4All
 from langchain_core.language_models.base import BaseLanguageModel
-from langchain_openai import ChatOpenAI
+from langchain_openai import ChatOpenAI,  OpenAI
+from langchain.prompts import PromptTemplate
 
 from reviewassistant.params import MODEL_DIR, OPENAI_API_KEY
 
 GPT4ALL_MODELS_URL = "https://gpt4all.io/models/gguf/"
-
 
 def download_gpt4all_model(model_name: str, model_path: str):
     url = GPT4ALL_MODELS_URL + model_name
@@ -52,3 +52,15 @@ def build_chain(model: BaseLanguageModel, vector_db) -> BaseRetrievalQA:
         verbose=False,
     )
     return qa
+
+def load_model_review(model_name: str):
+    llm = OpenAI(model_name=model_name, openai_api_key=OPENAI_API_KEY, temperature=0.9)
+    return llm
+
+
+def load_prompt(input_variables: str, template: str):
+    prompt = PromptTemplate(
+            input_variables = input_variables,
+            template = template
+            )
+    return prompt

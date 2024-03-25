@@ -13,7 +13,7 @@ MODE_STEP_1 = 'local'
 MODEL_NAME_STEP_1 = 'mistral-7b-openorca.gguf2.Q4_0.gguf'
 
 MODE_STEP_2 = 'openai'
-MODEL_NAME_STEP_2 = None
+MODEL_NAME_STEP_2 = "gpt-3.5-turbo-instruct"
 
 PROMPT_1 = "Given this product title, please select between 3 and 6 criteria to rate in order to compose a product review. No need to explain the criteria."
 
