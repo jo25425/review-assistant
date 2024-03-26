@@ -70,5 +70,5 @@ def invoke(chain: BaseRetrievalQA, prompt: str) -> str:
     start_time = datetime.now()
     print("Generating criteria...", end=' ')
     result = chain.invoke(prompt).get('result', '')
-    print(f"✅ ({(datetime.now() - start_time.total_seconds()):.2f}s)")
+    print(f"✅ ({(datetime.now() - start_time).total_seconds():.2f}s)")
     return result
