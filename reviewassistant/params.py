@@ -20,6 +20,12 @@ PROMPT_1 = f"Given this product title, please select between 3 and {MAX_CRITERIA
     " criteria to rate in order to compose a product review. No explanation," \
     " no example."
 
+#Linda's modifications
+PROMPT_2 = "Based on the given product title and ratings provided, generate a review for this product. \
+    Write it from a personal perspective as someone who has bought the product \
+    without being too informal and \
+    without explicitly referring to the fact that the review is based on a rating or provided information."
+
 ##################  CONSTANTS  ##################
 MODEL_DIR = "models"
 CHROMA_PERSIST_DIR = os.path.join('db', 'chroma_3')

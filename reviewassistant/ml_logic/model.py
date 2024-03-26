@@ -1,6 +1,5 @@
 from datetime import datetime
 import os
-
 import requests
 from langchain.callbacks.streaming_stdout_final_only import \
     FinalStreamingStdOutCallbackHandler
