@@ -8,9 +8,10 @@ from langchain.cache import InMemoryCache
 from langchain.chains import RetrievalQA
 from langchain.chains.retrieval_qa.base import BaseRetrievalQA
 from langchain.globals import set_llm_cache
+from langchain.prompts import PromptTemplate
 from langchain_community.llms import GPT4All
 from langchain_core.language_models.base import BaseLanguageModel
-from langchain_openai import ChatOpenAI
+from langchain_openai import ChatOpenAI, OpenAI
 
 from reviewassistant.params import MODEL_DIR, OPENAI_API_KEY
 
@@ -54,6 +55,19 @@ def load_model(mode: str, model_name: str):
 
         print("✅")
         return llm
+
+
+def load_model_review(model_name: str, openai_key):
+    llm = OpenAI(model_name=model_name, openai_api_key=openai_key, temperature=0.9)
+    return llm
+
+
+def load_prompt(input_variables: str, template: str):
+    prompt = PromptTemplate(
+            input_variables = input_variables,
+            template = template
+            )
+    return prompt
 
 
 def build_chain(model: BaseLanguageModel, vector_db) -> BaseRetrievalQA:
