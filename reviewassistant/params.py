@@ -20,3 +20,5 @@ PROMPT_1 = "Given this product title, please select between 3 and 6 criteria to 
 ##################  CONSTANTS  ##################
 MODEL_DIR = "models"
 CHROMA_PERSIST_DIR = os.path.join('db', 'chroma_3')
+
+MAX_CRITERIA = 5
