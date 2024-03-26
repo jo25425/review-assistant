@@ -16,6 +16,21 @@ To run it locally, navigate to the root of this repository and run:
 uvicorn reviewassistant.api.fast:app --reload
 ```
 
+To run it in Docker, make sure to have the Docker daemon running and build the image:
+```bash
+docker build --tag=$GAR_IMAGE:dev .
+```
+Then you can access its shell with:
+```bash
+docker run -it -e PORT=8000 -p 8000:8000 $GAR_IMAGE:dev sh
+```
+
+And finally, to run it:
+```bash
+docker run -e PORT=8000 -p 8000:8000 --env-file $GAR_IMAGE:dev
+```
+
+
 ## Application frontend
 
 The frontend will be built and served with Streamlit and deployed to Streamlit cloud.
