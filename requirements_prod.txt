@@ -1,0 +1,7 @@
+chromadb==0.4.24
+fastapi==0.110.0
+gpt4all==2.3.0
+langchain-openai==0.0.8
+langchain-text-splitters==0.0.1
+python-dotenv==1.0.1
+uvicorn==0.28.1
