@@ -13,8 +13,22 @@ def generate_criteria(product_txt: str, model: BaseLanguageModel) -> list[str]:
     criteria = parse_criteria(result)
     return criteria
 
-def generate_reviews(rated_criteria: dict[str, int], model: BaseLanguageModel, num_reviews: int=NUM_REVIEWS) -> str:
-    pass
+
+def generate_reviews(product: str, rated_criteria: dict[str, int], model: BaseLanguageModel, num_reviews: int=NUM_REVIEWS) -> str:
+    for criteria, rating in rated_criteria.items():
+        if rating >= 4:
+            PROMPT_2 += f"The {product} excels in {criteria.lower()} as it offers exceptional {criteria.lower()}.\n"
+        elif rating >= 3:
+            PROMPT_2 += f"The {product} performs well in terms of {criteria.lower()} with {criteria.lower()} that meet expectations.\n"
+        elif rating >= 2:
+            PROMPT_2 += f"The {product} has average {criteria.lower()}, providing satisfactory {criteria.lower()}.\n"
+        else:
+            PROMPT_2 += f"The {product} could improve its {criteria.lower()} as the current {criteria.lower()} is below expectations.\n"
+
+    vector_db = embed_text(product, rated_criteria, MODE_STEP_2)
+    chain = build_chain(model, vector_db)
+    result = chain.invoke(PROMPT_2).get('result')
+    return result
 
 
 if __name__ == '__main__':
@@ -34,8 +48,9 @@ if __name__ == '__main__':
     print(rated_criteria)
 
     # Second inference
-    llm_step_2 = None  #TODO Reuse if same as before, otherwise load
-    reviews = generate_reviews(rated_criteria)
+    # Linda's modifications
+    llm_step_2 = load_model(mode=MODE_STEP_2, model_name=MODEL_NAME_STEP_2)  #TODO Reuse if same as before, otherwise load
+    reviews = generate_reviews(product, rated_criteria, llm_step_2)
 
     print("\nHere are some potential reviews:")
     for i, review in enumerate(reviews):
