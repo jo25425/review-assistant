@@ -40,4 +40,4 @@ def get_reviews(product: str, rated_criteria: str) -> list[str]:
 
 @app.get("/")
 def root() -> str:
-    return "Hello from your review writing assistant :)"
+    return "Review Writing Assistant API. See endpoint /docs for documentation."

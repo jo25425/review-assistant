@@ -12,9 +12,10 @@ _Review writing assistant (final project from Le Wagon Machine Learning Bootcamp
 
  ℹ️ The image is around 2.5GB, but if you're getting memory errors, build it for a smaller GPT4 model than the one selected by default (see list oby scrolling down on the [GPT4All page](https://gpt4all.io/index.html)).
 
- <!-- 🚨 To run in Docker, you'll need to allow containers to use at least 14Gi of RAM (add Swap memory too in order to make better use of your resources). -->
+ 🚨 To run in Docker, you'll need to allow containers to use at least 14Gi of RAM (add Swap memory too in order to make better use of your resources).
 
-This API is built with FastAPI and served via uvicorn.
+This API is built with FastAPI and served via uvicorn. You'll need to make a copy of the
+file `.env.sample` called `.env` and add a valid OpenAI key in order to run it.
 
 To run it **locally**, navigate to the root of this repository and run:
 ```bash
@@ -38,4 +39,7 @@ docker run -e PORT=8000 -p 8000:8000 --env-file $GAR_IMAGE:dev
 
 ## Application frontend
 
-The frontend will be built and served with Streamlit and deployed to Streamlit cloud.
+The frontend is built with Streamlit and deployed to Streamlit cloud.
+
+-  Repository: [review-assistant-website](https://github.com/jo25425/review-assistant-website)
+-  App: [review-writing-assistant.streamlit.app](https://review-writing-assistant.streamlit.app/)
