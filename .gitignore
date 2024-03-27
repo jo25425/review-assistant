@@ -1,12 +1,13 @@
 # Data
 raw_data/
+db/
+models/
 
 # Secrets
 .env
+.env.yaml
 
 # System files
 .DS_Store
 .ipynb_checkpoints
-db/
-models/
 __pycache__

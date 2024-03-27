@@ -10,9 +10,9 @@ _Review writing assistant (final project from Le Wagon Machine Learning Bootcamp
 
 ## Criteria and review generation API
 
- 🚨 The image is just under 10Gi, you'll need to have a lot of RAM or build it for a smaller GPT4 model than the one selected by default (see list oby scrolling down on the [GPT4All page](https://gpt4all.io/index.html)).
+ ℹ️ The image is around 2.5GB, but if you're getting memory errors, build it for a smaller GPT4 model than the one selected by default (see list oby scrolling down on the [GPT4All page](https://gpt4all.io/index.html)).
 
- 🚨 To run in Docker, you'll need to allow containers to use at least 14Gi of RAM (add Swap memory too in order to make better use of your resources).
+ <!-- 🚨 To run in Docker, you'll need to allow containers to use at least 14Gi of RAM (add Swap memory too in order to make better use of your resources). -->
 
 This API is built with FastAPI and served via uvicorn.
 
