@@ -1,3 +1,4 @@
+import json
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -30,8 +31,9 @@ def get_criteria(product: str) -> list[str]:
     return criteria
 
 
-@app.get("/reviews")
-def get_reviews(product: str, rated_criteria: dict[str, int]) -> list[str]:
+@app.post("/reviews")
+def get_reviews(product: str, rated_criteria: str) -> list[str]:
+    rated_criteria = json.loads(rated_criteria)
     reviews = generate_reviews(product, rated_criteria, app.state.model_2)
     return reviews
 
