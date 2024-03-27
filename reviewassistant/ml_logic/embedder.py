@@ -13,16 +13,17 @@ def extract_documents(text: str) -> list[Document]:
     return docs
 
 def embed_text(text: str, mode: str) -> list[Document]:
-    print("Embedding text...", end=' ')
+    print("Embedding text...", end=' ', flush=True)
 
     docs = extract_documents(text)
 
     if mode == 'openai':
         embedder = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
+        persist_dir = os.path.join(CHROMA_PERSIST_DIR, 'openai')
     else:
         embedder = HuggingFaceEmbeddings(model_name=HG_EMBEDDING_MODEL)
+        persist_dir = os.path.join(CHROMA_PERSIST_DIR, HG_EMBEDDING_MODEL)
 
-    persist_dir = os.path.join(CHROMA_PERSIST_DIR, HG_EMBEDDING_MODEL)
     vector_db = Chroma.from_documents(
         docs,
         embedder,

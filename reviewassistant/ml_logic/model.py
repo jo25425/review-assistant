@@ -32,7 +32,7 @@ def download_gpt4all_model(model_name: str, model_path: str):
 
 
 def load_model(mode: str, model_name: str):
-    print("Loading model...", end=' ')
+    print("Loading model...", end=' ', flush=True)
 
     # OpenAI
     if mode == 'openai':
@@ -67,7 +67,7 @@ def build_chain(model: BaseLanguageModel, vector_db) -> BaseRetrievalQA:
 
 def invoke(chain: BaseRetrievalQA, prompt: str) -> str:
     start_time = datetime.now()
-    print("Generating criteria...", end=' ')
+    print("Inferring...", end=' ', flush=True)
     result = chain.invoke(prompt).get('result', '')
     print(f"✅ ({(datetime.now() - start_time).total_seconds():.2f}s)")
     return result

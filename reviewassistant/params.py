@@ -8,7 +8,6 @@ NUM_REVIEWS = int(os.environ.get('NUM_REVIEWS'))
 HG_EMBEDDING_MODEL = os.environ.get('HG_EMBEDDING_MODEL')
 
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
-OPENAI_MODEL = os.environ.get('OPENAI_MODEL')
 
 MODE_STEP_1 = os.environ.get('MODE_STEP_1')
 MODEL_NAME_STEP_1 = os.environ.get('MODEL_NAME_STEP_1')
@@ -20,10 +19,11 @@ PROMPT_1 = f"Given this product title, please select between 3 and {MAX_CRITERIA
     " criteria to rate in order to compose a product review. No explanation," \
     " no example."
 
-PROMPT_2 = "Based on the given product title and ratings provided, generate a review for this product. \
-    Write it from a personal perspective as someone who has bought the product \
-    without being too informal and \
-    without explicitly referring to the fact that the review is based on a rating or provided information."
+PROMPT_2 = f"Based on the given product title and ratings provided, generate {NUM_REVIEWS}" \
+    " review(s) for this product. Write it from a personal perspective as someone" \
+    " who has bought the product without being too informal and without" \
+    " explicitly referring to the fact that the review is based on a rating or" \
+    " provided information."
 
 ##################  CONSTANTS  ##################
 MODEL_DIR = "models"
