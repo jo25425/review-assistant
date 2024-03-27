@@ -34,7 +34,6 @@ def parse_reviews(text: str) -> list[str]:
     """Given a block of text containing multiple reviews, attempts to separate
     these reviews.
     """
-
     lines = text.strip().split('\n')
     reviews = []
     current_review = ""
@@ -46,9 +45,13 @@ def parse_reviews(text: str) -> list[str]:
             current_review = ""
 
     for i, line in enumerate(lines):
-        # If the line isn't the review title or empty, then we add it to the
-        # current review being "read"
-        if not (line.lower().startswith("review") or line.strip() == ""):
+        # Strip the line from a potential review title
+        if line.startswith("Review"):
+            line = strip_non_alpha(line[7:])
+
+        # If the line isn't empty now, then we add it to the current review
+        # being "read"
+        if not line.strip() == "":
             current_review += strip_non_alpha(line)
         # Otherwise it means the review we were reading is over
         else:
