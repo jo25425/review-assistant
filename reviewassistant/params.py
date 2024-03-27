@@ -16,7 +16,7 @@ MODE_STEP_2 = os.environ.get('MODE_STEP_2')
 MODEL_NAME_STEP_2 = os.environ.get('MODEL_NAME_STEP_2')
 
 PROMPT_1 = f"Given this product title, please select between 3 and {MAX_CRITERIA}" \
-    " criteria to rate in order to compose a product review. No explanation," \
+    " criteria to rate in order to compose a review for this product. No explanation," \
     " no example."
 
 PROMPT_2 = f"Based on the given product title and ratings provided, generate {NUM_REVIEWS}" \
