@@ -1,4 +1,4 @@
-import hashlib
+from hashlib import sha1
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain.schema.document import Document
 from langchain_community.vectorstores import Chroma
@@ -9,8 +9,9 @@ from reviewassistant.params import *
 
 
 def get_persist_directory(text: str, model_name: str) -> str:
-    embed_hash = hashlib.sha1((model_name + '-' + text).encode()).hexdigest()
-    return os.path.join(CHROMA_PERSIST_DIR, embed_hash)
+    embeddings_id = os.path.basename(model_name) + '-' + text
+    id_hash = sha1((embeddings_id).encode()).hexdigest()
+    return os.path.join(CHROMA_PERSIST_DIR, id_hash)
 
 
 def extract_documents(text: str) -> list[Document]:
