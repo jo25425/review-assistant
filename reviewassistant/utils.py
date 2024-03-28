@@ -1,4 +1,7 @@
-from reviewassistant.params import MAX_CRITERIA, PROMPT_2
+from reviewassistant.params import MAX_CRITERIA
+
+
+QUALIFIERS = ["terrible", "poor", "acceptable", "good", "excellent"]
 
 
 def strip_non_alpha(text: str) -> str:
@@ -65,15 +68,7 @@ def parse_reviews(text: str) -> list[str]:
 
 
 def build_reviews_input(product: str, rated_criteria: dict[str, int]) -> str:
-    txt = ""
+    txt = f"Product: {product}\nRatings:\n"
     for criterium, rating in rated_criteria.items():
-        criterium = criterium.lower()
-        if rating >= 4:
-            txt += f"The {product} excels in {criterium} as it offers exceptional {criterium}.\n"
-        elif rating >= 3:
-            txt += f"The {product} performs well in terms of {criterium} with {criterium} that meets expectations.\n"
-        elif rating >= 2:
-            txt += f"The {product} has average {criterium}, providing satisfactory {criterium}.\n"
-        else:
-            txt += f"The {product} could improve its {criterium} as the current {criterium} is below expectations.\n"
+        txt += f" - {criterium.title()} rated {QUALIFIERS[rating-1]} out of 5\n"
     return txt
