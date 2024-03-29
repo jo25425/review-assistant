@@ -1,12 +1,20 @@
-from reviewassistant.params import MAX_CRITERIA, PROMPT_2
+from reviewassistant.params import MAX_CRITERIA
 
 
-def strip_non_alpha(text: str) -> str:
+QUALIFIERS = ["terrible", "poor", "acceptable", "good", "excellent"]
+
+
+def strip_numbering(text: str) -> str:
     '''Strips non-letters from the beginning of the string and spaces from the
     end.'''
     while len(text) and not text[0].isalpha():
         text = text[1:]
     return text.strip()
+
+def strip_details(text: str) -> str:
+    if ' (' in text:
+        text = text[:(text.index(' ('))]
+    return text
 
 
 def parse_criteria(text: str) -> list[str]:
@@ -22,7 +30,7 @@ def parse_criteria(text: str) -> list[str]:
         criteria = lines if len(lines) > 1 else lines[0].split(', ')
         debug_str += f"-> criteria: {criteria}"
 
-        cleaned_criteria = [strip_non_alpha(c) for c in criteria]
+        cleaned_criteria = [strip_details(strip_numbering(c)) for c in criteria]
         debug_str += f"-> criteria cleaned: {cleaned_criteria}"
     except:
         print(debug_str)
@@ -47,12 +55,12 @@ def parse_reviews(text: str) -> list[str]:
     for i, line in enumerate(lines):
         # Strip the line from a potential review title
         if line.startswith("Review"):
-            line = strip_non_alpha(line[7:])
+            line = strip_numbering(line[7:])
 
         # If the line isn't empty now, then we add it to the current review
         # being "read"
         if not line.strip() == "":
-            current_review += strip_non_alpha(line)
+            current_review += strip_numbering(line)
         # Otherwise it means the review we were reading is over
         else:
             add_current_review()
@@ -65,15 +73,7 @@ def parse_reviews(text: str) -> list[str]:
 
 
 def build_reviews_input(product: str, rated_criteria: dict[str, int]) -> str:
-    txt = ""
+    txt = f"Product: {product}\nRatings:\n"
     for criterium, rating in rated_criteria.items():
-        criterium = criterium.lower()
-        if rating >= 4:
-            txt += f"The {product} excels in {criterium} as it offers exceptional {criterium}.\n"
-        elif rating >= 3:
-            txt += f"The {product} performs well in terms of {criterium} with {criterium} that meets expectations.\n"
-        elif rating >= 2:
-            txt += f"The {product} has average {criterium}, providing satisfactory {criterium}.\n"
-        else:
-            txt += f"The {product} could improve its {criterium} as the current {criterium} is below expectations.\n"
+        txt += f" - {criterium.title()} rated {QUALIFIERS[rating-1]} ({rating} out of 5)\n"
     return txt

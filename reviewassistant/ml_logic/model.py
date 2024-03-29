@@ -17,7 +17,7 @@ from reviewassistant.params import MODEL_DIR, OPENAI_API_KEY
 GPT4ALL_MODELS_URL = "https://gpt4all.io/models/gguf/"
 
 
-# set_llm_cache(InMemoryCache())
+set_llm_cache(InMemoryCache())
 os.makedirs(MODEL_DIR, exist_ok=True)
 
 
