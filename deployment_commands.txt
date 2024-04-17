@@ -1,0 +1,25 @@
+# NB: The tag "prod" in the following commands should be adjusting depending on
+# which api version should be updated.
+
+# Build image for GCP
+docker build -t $GCP_REGION-docker.pkg.dev/$GCP_PROJECT_ID/$DOCKER_REPO_NAME/$DOCKER_IMAGE_NAME:prod .
+
+# Push image to GCP
+docker push $GCP_REGION-docker.pkg.dev/$GCP_PROJECT_ID/$DOCKER_REPO_NAME/$DOCKER_IMAGE_NAME:prod
+
+# For creating service
+gcloud run deploy review-assistant \
+--image=$GCP_REGION-docker.pkg.dev/$GCP_PROJECT_ID/$DOCKER_REPO_NAME/$DOCKER_IMAGE_NAME:prod \
+--allow-unauthenticated \
+--cpu=4 \
+--memory=16Gi \
+--max-instances=1 \
+--region=$GCP_REGION \
+--project=$GCP_PROJECT_ID \
+--env-vars-file .env.yaml
+
+
+# For debugging image
+docker run --rm -it -v \
+/var/run/docker.sock:/var/run/docker.sock wagoodman/dive:latest \
+$GCP_REGION-docker.pkg.dev/$GCP_PROJECT_ID/$DOCKER_REPO_NAME/$DOCKER_IMAGE_NAME:prod
